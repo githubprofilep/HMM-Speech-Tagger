@@ -360,15 +360,13 @@ We will also estimate the starting probability distribution (the probability of 
 
 The maximum likelihood estimate of these distributions can be calculated from the frequency counts as described in the following sections where you'll implement functions to count the frequencies, and finally build the model. The HMM model will make predictions according to the formula:
 
-$$t_i^n = \underset{t_i^n}{\mathrm{argmax}} \prod_{i=1}^n P(w_i|t_i) P(t_i|t_{i-1})$$
-
+𝑡𝑛𝑖=argmax𝑡𝑛𝑖∏𝑖=1𝑛𝑃(𝑤𝑖|𝑡𝑖)𝑃(𝑡𝑖|𝑡𝑖−1)
 Refer to Speech & Language Processing Chapter 10 for more information.
 
 IMPLEMENTATION: Unigram Counts
 Complete the function below to estimate the co-occurrence frequency of each symbol over all of the input sequences. The unigram probabilities in our HMM model are estimated from the formula below, where N is the total number of samples in the input. (You only need to compute the counts for now.)
 
-$$P(tag_1) = \frac{C(tag_1)}{N}$$
-
+𝑃(𝑡𝑎𝑔1)=𝐶(𝑡𝑎𝑔1)𝑁
 def unigram_counts(sequences):
     """Return a dictionary keyed to each unique value in the input sequence list that
     counts the number of occurrences of the value in the sequences list. The sequences
@@ -401,8 +399,8 @@ HTML('<div class="alert alert-block alert-success">Your tag unigrams look good!<
 {'ADV': 44877, 'NOUN': 220632, '.': 117757, 'VERB': 146161, 'ADP': 115808, 'ADJ': 66754, 'CONJ': 30537, 'DET': 109671, 'PRT': 23906, 'NUM': 11878, 'PRON': 39383, 'X': 1094}
 Your tag unigrams look good!
 IMPLEMENTATION: Bigram Counts
-Complete the function below to estimate the co-occurrence frequency of each pair of symbols in each of the input sequences. These counts are used in the HMM model to estimate the bigram probability of two tags from the frequency counts according to the formula: $$P(tag_2|tag_1) = \frac{C(tag_2|tag_1)}{C(tag_2)}$$
-
+Complete the function below to estimate the co-occurrence frequency of each pair of symbols in each of the input sequences. These counts are used in the HMM model to estimate the bigram probability of two tags from the frequency counts according to the formula:
+𝑃(𝑡𝑎𝑔2|𝑡𝑎𝑔1)=𝐶(𝑡𝑎𝑔2|𝑡𝑎𝑔1)𝐶(𝑡𝑎𝑔2)
 def bigram_counts(sequences):
     """Return a dictionary keyed to each unique PAIR of values in the input sequences
     list that counts the number of occurrences of pair in the sequences list. The input
@@ -496,13 +494,13 @@ IMPLEMENTATION: Basic HMM Tagger
 Use the tag unigrams and bigrams calculated above to construct a hidden Markov tagger.
 
 Add one state per tag
-The emission distribution at each state should be estimated with the formula: $P(w|t) = \frac{C(t, w)}{C(t)}$
+The emission distribution at each state should be estimated with the formula: 𝑃(𝑤|𝑡)=𝐶(𝑡,𝑤)𝐶(𝑡)
 Add an edge from the starting state basic_model.start to each tag
-The transition probability should be estimated with the formula: $P(t|start) = \frac{C(start, t)}{C(start)}$
+The transition probability should be estimated with the formula: 𝑃(𝑡|𝑠𝑡𝑎𝑟𝑡)=𝐶(𝑠𝑡𝑎𝑟𝑡,𝑡)𝐶(𝑠𝑡𝑎𝑟𝑡)
 Add an edge from each tag to the end state basic_model.end
-The transition probability should be estimated with the formula: $P(end|t) = \frac{C(t, end)}{C(t)}$
+The transition probability should be estimated with the formula: 𝑃(𝑒𝑛𝑑|𝑡)=𝐶(𝑡,𝑒𝑛𝑑)𝐶(𝑡)
 Add an edge between every pair of tags
-The transition probability should be estimated with the formula: $P(t_2|t_1) = \frac{C(t_1, t_2)}{C(t_1)}$
+The transition probability should be estimated with the formula: 𝑃(𝑡2|𝑡1)=𝐶(𝑡1,𝑡2)𝐶(𝑡1)
 basic_model = HiddenMarkovModel(name="base-hmm-tagger")
 ​
 # TODO: create states with emission probability distributions P(word | tag) and add to the model
@@ -669,4 +667,3 @@ training_corpus.tagged_sents()[0]
  ('took', 'VBD'),
  ('place', 'NN'),
  ('.', '.')]
-​
